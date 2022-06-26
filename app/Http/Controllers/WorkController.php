@@ -49,7 +49,12 @@ class WorkController extends Controller
 
    public function show($id)
    {
-     $work = Work::find($id);
+   //   $work = Work::find($id);
+
+   $work = Work::select('works.*','users.name as name')
+   ->join('users','works.user_id', '=', 'users.id')
+   ->find($id);
+   
 
         return view('show',compact('work'));
 

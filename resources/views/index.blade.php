@@ -30,9 +30,13 @@
       
     @foreach($work as $work)
     <div>
-          <h2> {{ $work->title }}</h2>
+         <a href="/works/show/{{ $work->id }}"> <h2> {{ $work->title }}</h2></a>
 
-          {{ $work->created_at->diffForHumans() }} \ Admin
+          <i>{{ $work->created_at->diffForHumans() }} </i><b>
+
+            {{ $work->name }}
+          </b>
+           
 
           <p> {{ $work->body }}</p>
 
@@ -65,7 +69,7 @@
 
    @endforeach  
 
-   {{ $work->links() }}
+   
 
       </div>
 

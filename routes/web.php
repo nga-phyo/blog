@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MyWorkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::get('login', [LoginController::class, 'index']);
 Route::post('login', [LoginController::class, 'store']);
 
 Route::get('logout', [LoginController::class, 'destroy']);
+
+
+Route::get('my-works',[MyWorkController::class, 'index']);
 
 
 

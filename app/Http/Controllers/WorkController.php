@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
-   public function index()
+   public function index(Request $request)
    {
 
    //   if( Auth::check())
@@ -20,12 +20,18 @@ class WorkController extends Controller
       // $user = Auth::user();
 
       // dd($user);
-       //$work = Work::all();
+
+      //  $work = Work::paginate(4);
+
+   
+      $work = Work::where('title', 'like', '%' . $request->search . '%')->orderBy('id', 'desc')->paginate(3);
 
 
-       $work = Work::select('works.*','users.name as name')
-       ->join('users','works.user_id', '=','users.id')
-       ->paginate(5);
+
+      //  $work = Work::select('works.*','users.name as name')
+      //  ->join('users','works.user_id', '=','users.id')
+      //  ->orderBy('id','desc')
+      //  ->paginate(5);
 
        return view('index',compact('work'));
    }
@@ -37,6 +43,7 @@ class WorkController extends Controller
       // $post->body = request('body');
       $work->title = $request->title;
       $work->body = $request->body;
+      $work->user_id = auth()->id();
 
       $work->created_at = now();
       $work->updated_at = now();
@@ -53,7 +60,8 @@ class WorkController extends Controller
 
    $work = Work::select('works.*','users.name as name')
    ->join('users','works.user_id', '=', 'users.id')
-   ->find($id);
+   ->where('works.id', $id)
+   ->first();
    
 
         return view('show',compact('work'));

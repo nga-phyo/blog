@@ -15,6 +15,10 @@
                <li class="nav-item">
                 <a class="nav-link" href="/works/create">Create A Post</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/cagethories">Cagethory</a>
+            </li>
                @endauth
 
                 @if(Auth::check())
@@ -37,6 +41,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
+
+                
                 @endif
                 
 

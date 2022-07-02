@@ -32,13 +32,13 @@
        </form>
     </div>
   </div>
-{{-- 
+
   @if(session('nice'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
       {{ session('nice') }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  @endif  --}}
+  @endif 
 
 
    <div class="row justify-content-end">
@@ -58,15 +58,24 @@
  
            <i>{{ $work->created_at->diffForHumans() }} </i><b>
  
-             {{-- {{ $work->name }} --}}
-             {{-- {{ $work->user()->first()->name}} --}}
+             {{ $work->name }} 
+             {{ $work->user()->first()->name}} 
              {{ $work->user->name}}
            </b>
             
  
            <p> {{ $work->body }}</p>
  
+           @foreach ($work->cagethory() as $cagethory)
+           
+           <b>{{ $cagethories->id }}</b>
+           <b>{{ $cagethoreis->name }}</b>
+       @endforeach 
+
+           
+
  
+
    
  
   
@@ -97,15 +106,14 @@
     </div>
    </div>
 
-        @else
-        no post
+        
 
      @endif
        
      
 
 
- {{-- {{ $work->links() }} --}}
+  {{-- {{ $work->links() }} --}}
 
    
 
@@ -117,3 +125,50 @@
 
 
 @endsection
+
+ 
+
+{{-- 
+@extends('section.design')
+@section('title', 'Post List')
+@section('text')
+    <div class="row justify-content-center py-5">
+        @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session()->get('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <div class="col-8">
+            @foreach ($work as $work)
+            <div>
+                <h3>
+                    <a href="/works/{{ $work->id }}">{{ $work->title }}</a>
+                 </h3>
+                 <i>{{ $work->created_at->diffForHumans() }}</i> by {{ $work->user->name }}
+                 <p>{{ $work->body }}</p>
+
+                 @foreach ($work->cagethoreis() as $cagethory)
+                     <b>{{ $cagethory->name }} | </b>
+                 @endforeach
+
+                 @if($work->isOwnpost())
+                 <div class="d-flex justify-content-end">
+                     <a href="/works/{{ $work->id }}/edit/" class="btn btn-outline-success">Edit</a>
+                    <form action="/works/{{ $work->id }}"
+                        method="POST"
+                        onsubmit="return confirm('Are you sure to delete?')">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger ms-2">Delete</button>
+                    </form>
+                </div>
+                @endif
+            </div>
+        
+            <hr>
+        @endforeach
+    
+        </div>
+    </div>
+@endsection --}}

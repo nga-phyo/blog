@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CagethoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\RegisterController;
@@ -39,6 +40,17 @@ Route::get('logout', [LoginController::class, 'destroy']);
 
 
 Route::get('my-works',[MyWorkController::class, 'index']);
+
+
+
+Route::get('cagethories',[CagethoryController::class, 'index']);
+Route::get('cagethories/create',[CagethoryController::class, 'create']);
+Route::post('cagethories/update/{id}',[CagethoryController::class ,'update']);
+Route::post('cagethories/store',[CagethoryController::class ,'store']);
+Route::get('cagethories/show/{id}',[CagethoryController::class ,'show']);
+Route::delete('cagethories/destroy/{id}',[CagethoryController::class ,'destroy']);
+Route::get('cagethories/edit/{id}',[CagethoryController::class ,'edit']);
+
 
 
 
